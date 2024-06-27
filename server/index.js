@@ -8,13 +8,23 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://attendance-frontend-13sv3vjne-aditya-shrimalis-projects.vercel.app/",
+    ],
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://attendance-frontend-13sv3vjne-aditya-shrimalis-projects.vercel.app/",
+    ],
+  })
+);
 io.on("connection", (socket) => {
   console.log("Client connected");
 
