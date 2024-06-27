@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 import io from "socket.io-client";
 
-const socket = io.connect("https://attendance-backend-rho.vercel.app/"); // Ensure this matches your server address
+const socket = io.connect(
+  "https://attendance-backend-rho.vercel.app/socket.io"
+); // Ensure this matches your server address
 
 function Teacher() {
   const [form, setForm] = useState({
