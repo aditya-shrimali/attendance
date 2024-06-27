@@ -5,7 +5,14 @@ import cors from "cors";
 
 const app = express();
 const server = http.createServer(app);
-
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://attendance-frontend-umber.vercel.app",
+    ],
+  })
+);
 const io = new Server(server, {
   cors: {
     origin: [
@@ -17,14 +24,6 @@ const io = new Server(server, {
   },
 });
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://attendance-frontend-umber.vercel.app",
-    ],
-  })
-);
 io.on("connection", (socket) => {
   console.log("Client connected");
 
