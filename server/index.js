@@ -10,7 +10,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173",
-      "https://attendance-frontend-umber.vercel.app/",
+      "https://attendance-frontend-umber.vercel.app",
     ],
     methods: ["GET", "POST"],
     credentials: true,
@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://attendance-frontend-umber.vercel.app/",
+      "https://attendance-frontend-umber.vercel.app",
     ],
   })
 );
