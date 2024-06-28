@@ -9,7 +9,7 @@ app.use(
   cors({
     origin: [
       "https://attendance-frontend-umber.vercel.app",
-      "https://attendance-frontend-aditya-shrimalis-projects.vercel.app/",
+      "https://attendance-frontend-aditya-shrimalis-projects.vercel.app",
       "http://localhost:5173",
     ],
   })
@@ -18,7 +18,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "https://attendance-frontend-umber.vercel.app",
-      "https://attendance-frontend-aditya-shrimalis-projects.vercel.app/",
+      "https://attendance-frontend-aditya-shrimalis-projects.vercel.app",
       "http://localhost:5173",
     ],
     methods: ["GET", "POST"],
