@@ -8,16 +8,18 @@ const server = http.createServer(app);
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
       "https://attendance-frontend-umber.vercel.app",
+      "https://attendance-frontend-aditya-shrimalis-projects.vercel.app/",
+      "http://localhost:5173",
     ],
   })
 );
 const io = new Server(server, {
   cors: {
     origin: [
-      "http://localhost:5173",
       "https://attendance-frontend-umber.vercel.app",
+      "https://attendance-frontend-aditya-shrimalis-projects.vercel.app/",
+      "http://localhost:5173",
     ],
     methods: ["GET", "POST"],
     credentials: true,
