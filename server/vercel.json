@@ -7,6 +7,7 @@
       }
     ],
     "routes": [
+        {"src": "/socket.io", "dest": "/api/socketio.js", "methods": ["GET", "POST"]},
       {
          "src": "/(.*)",
          "dest": "/",
