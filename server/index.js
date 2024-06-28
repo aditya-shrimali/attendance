@@ -12,6 +12,8 @@ app.use(
       "https://attendance-frontend-aditya-shrimalis-projects.vercel.app",
       "http://localhost:5173",
     ],
+    credentials: true,
+    methods: ["GET", "POST"],
   })
 );
 const io = new Server(server, {
