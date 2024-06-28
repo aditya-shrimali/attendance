@@ -9,22 +9,23 @@ QRScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
 
 function Student() {
   const videoRef = useRef(null);
+  const qrScannerRef = useRef(null);
   const [scanResult, setScanResult] = useState(null);
   const [studentName, setStudentName] = useState("");
   const [uploadMode, setUploadMode] = useState(false);
 
   useEffect(() => {
-    if (!uploadMode) {
-      const qrScanner = new QRScanner(videoRef.current, (result) =>
-        setScanResult(JSON.parse(result))
-      );
-      qrScanner.start();
+    if (!uploadMode && !scanResult) {
+      qrScannerRef.current = new QRScanner(videoRef.current, (result) => {
+        setScanResult(JSON.parse(result));
+      });
+      qrScannerRef.current.start();
 
       return () => {
-        qrScanner.stop(); // Stop scanning when the component unmounts
+        qrScannerRef.current.stop();
       };
     }
-  }, [uploadMode]);
+  }, [uploadMode, scanResult]);
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -52,6 +53,15 @@ function Student() {
     }
   };
 
+  const handleScanMode = () => {
+    setUploadMode(false);
+    setScanResult(null);
+  };
+
+  const handleUploadMode = () => {
+    setUploadMode(true);
+  };
+
   return (
     <section className="flex flex-col items-center mt-12 px-4 sm:px-6 lg:px-8">
       <div className="container max-w-[70%] mx-auto">
@@ -60,25 +70,25 @@ function Student() {
         </h1>
         <div className="mode-buttons mb-5 flex gap-5 justify-center">
           <button
-            onClick={() => setUploadMode(false)}
+            onClick={handleScanMode}
             className="bg-blue-400 p-3 rounded-xl text-white"
           >
             Scan QR Code
           </button>
           <button
-            onClick={() => setUploadMode(true)}
+            onClick={handleUploadMode}
             className="bg-green-400 p-3 rounded-xl text-white"
           >
             Upload QR Code
           </button>
         </div>
 
-        {!uploadMode ? (
+        {!uploadMode && !scanResult ? (
           <video
             ref={videoRef}
             className="w-full h-auto border-2 border-gray-300 rounded-lg shadow-md"
           />
-        ) : (
+        ) : uploadMode ? (
           <div className="upload-section flex flex-col items-center">
             <input
               type="file"
@@ -87,7 +97,7 @@ function Student() {
               className="border border-gray-300 rounded-lg p-2"
             />
           </div>
-        )}
+        ) : null}
 
         {scanResult && (
           <div className="class-details mt-5">
