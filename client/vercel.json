@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "routes": [
+      {
+        "src": "/((?!api).*)",
+        "dest": "/index.html",
+        "methods": ["GET"]
+      }
+    ],
+    "rewrites": [
+      { "source": "/((?!api).*)", "destination": "/index.html" }
+    ]
+}
+  
