@@ -53,55 +53,69 @@ function Student() {
   };
 
   return (
-    <section>
-      <div className="container max-w-[70%] m-auto mt-5">
-        <h1 className="text-center text-4xl font-bold mb-5">
+    <section className="flex flex-col items-center mt-12 px-4 sm:px-6 lg:px-8">
+      <div className="container max-w-[70%] mx-auto">
+        <h1 className="text-center text-3xl sm:text-4xl font-bold mb-5">
           Scan or Upload QR Code
         </h1>
-        <div className="mode-buttons mb-5 flex gap-5">
+        <div className="mode-buttons mb-5 flex gap-5 justify-center">
           <button
             onClick={() => setUploadMode(false)}
-            className="bg-blue-400 p-3 rounded-xl"
+            className="bg-blue-400 p-3 rounded-xl text-white"
           >
             Scan QR Code
           </button>
           <button
             onClick={() => setUploadMode(true)}
-            className="bg-green-400 p-3 rounded-xl"
+            className="bg-green-400 p-3 rounded-xl text-white"
           >
             Upload QR Code
           </button>
         </div>
 
         {!uploadMode ? (
-          <video ref={videoRef} style={{ width: "100%" }} />
+          <video
+            ref={videoRef}
+            className="w-full h-auto border-2 border-gray-300 rounded-lg shadow-md"
+          />
         ) : (
-          <div className="upload-section">
-            <input type="file" accept="image/*" onChange={handleFileChange} />
+          <div className="upload-section flex flex-col items-center">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="border border-gray-300 rounded-lg p-2"
+            />
           </div>
         )}
 
         {scanResult && (
-          <div className="class-details">
-            <h2 className="text-green-800 text-2xl font-semibold">
+          <div className="class-details mt-5">
+            <h2 className="text-green-800 text-2xl font-semibold mb-2">
               Class Details
             </h2>
             <p>Date: {scanResult.Date}</p>
             <p>Subject: {scanResult.Subject}</p>
             <p>Session: {scanResult.Session}</p>
             <p>Professor: {scanResult.Professor}</p>
-            <select onChange={handleSelectChange} value={studentName}>
-              <option value="">Select Your Name</option>
-              {/* Example student names; replace with dynamic data */}
-              <option value="John Doe">John Doe</option>
-              <option value="Jane Smith">Jane Smith</option>
-            </select>
-            <button
-              onClick={handleSubmit}
-              className="bg-blue-400 p-2 rounded-xl ml-2 mt-3"
-            >
-              Submit
-            </button>
+            <div className="mt-3 flex flex-col">
+              <select
+                onChange={handleSelectChange}
+                value={studentName}
+                className="border border-gray-300 rounded-lg p-2 w-[40%]"
+              >
+                <option value="">Select Your Name</option>
+                {/* Example student names; replace with dynamic data */}
+                <option value="John Doe">John Doe</option>
+                <option value="Jane Smith">Jane Smith</option>
+              </select>
+              <button
+                onClick={handleSubmit}
+                className="bg-blue-400 p-2 rounded-xl text-white mt-3 w-[40%]"
+              >
+                Submit
+              </button>
+            </div>
           </div>
         )}
       </div>
